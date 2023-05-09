@@ -1,0 +1,65 @@
+#version 330
+
+struct light_t{
+	vec4 position;
+	vec4 color;
+	int  type;
+	vec4 direction;
+
+	float ka;
+	float kd;
+	float ks;
+};
+
+struct material_t{
+	sampler2D textureUnitID;
+};
+
+uniform light_t light;
+uniform material_t materials;
+
+in vec4 fcolor;
+in vec4 fnormal;
+in vec4 fpos;
+in vec4 fuv;
+
+void main()
+{
+	vec4 finalColor=fcolor;
+	//Si la textura no esta activada, cogera el color asignado
+	finalColor=texture2D(materials.textureUnitID, fuv.xy);
+
+	vec4 finalLight=vec4(1.0f,1.0f,1.0f,1.0f);
+
+	float ambient=1.0f;
+	float diffuse=0.0f;
+	float specular=0.0f;
+
+	//En L guardamos el vector de incidencia con la luz de ese fragmento
+	vec3 L=vec3(0.0f,0.0f,0.0f);
+	//En N vamos a guardar la normal de cada pixel/fragmento
+	vec3 N=normalize(fnormal.xyz);
+
+	//Las direccionales van a tener rayos paralelos
+	if(light.type==0)//directional
+	{
+		L=normalize(light.direction.xyz);
+	}
+	//Las puntuales son puntos de luz
+	if(light.type==1)//puntual
+	{
+		L=normalize(light.position.xyz-fpos.xyz);
+	}
+
+	//Siempre será la misma
+	ambient=light.ka;
+	//Dependerá de como interactúe la luz con el objeto
+	diffuse=light.kd*max(dot(L,N),0.0f);
+	//Depende del material, rugosidad, pulido
+	//specular=light.ks;
+
+	finalLight=(ambient+diffuse+specular)*light.color;
+
+	gl_FragColor=finalColor*finalLight;
+
+}
