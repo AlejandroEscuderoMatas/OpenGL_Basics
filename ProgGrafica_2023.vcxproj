@@ -146,6 +146,7 @@
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="matrix4x4f.cpp" />
     <ClCompile Include="object3D.cpp" />
+    <ClCompile Include="OrbitalLight.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -157,9 +158,11 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="Main.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="matrix4x4f.h" />
     <ClInclude Include="object3D.h" />
+    <ClInclude Include="OrbitalLight.h" />
     <ClInclude Include="Program.h" />
     <ClInclude Include="Render.h" />
     <ClInclude Include="Shader.h" />

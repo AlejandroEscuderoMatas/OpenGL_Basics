@@ -39,7 +39,8 @@ public:
 	void setMatrixMVP(float* matrix);
 	void setMatrixM(float* matrix);
 
-	void setLight(Light light);
+	void setLight1(Light light);
+	void setLight2(Light light);
 	void setMaterial(Material mat);
 
 	void use();

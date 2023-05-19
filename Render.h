@@ -21,7 +21,8 @@ public:
 	Camera* camera;
 	Matrix4x4f proyectionMatrixAux;
 	std::vector<Object3D*> objectList;
-	Light* light;
+	Light* light1;
+	OrbitalLight* light2;
 
 	std::map<unsigned int, BufferObject> bufferList;
 	
@@ -29,7 +30,8 @@ public:
 	void setupObject(Object3D* obj);
 	void putCamera(Camera* cam);
 	void drawGL();
-	void putLight(Light* light);
-	Light* getLight();
+	void putLights(Light* light1, OrbitalLight* light2);
+	Light* getLight1();
+	OrbitalLight* getLight2();
 	void mainLoop();
 };

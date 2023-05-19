@@ -1,21 +1,4 @@
 ﻿  Main.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt\corecrt_math_defines.h(28,1): warning C4005: 'M_PI': redefinición de macro
 C:\Users\alexe\OneDrive\Documentos\U-TAD\TERCERO\ProgramacionGrafica\ProgGrafPractica2\ProgGrafica_2023_plantilla\ProgGrafica_2023\matrix4x4f.h(13): message : vea la definición anterior de 'M_PI'
-  Material.cpp
-C:\Users\alexe\OneDrive\Documentos\U-TAD\TERCERO\ProgramacionGrafica\ProgGrafPractica2\ProgGrafica_2023_plantilla\ProgGrafica_2023\matrix4x4f.h(13,1): warning C4005: 'M_PI': redefinición de macro
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt\corecrt_math_defines.h(28): message : vea la definición anterior de 'M_PI'
-  Program.cpp
-C:\Users\alexe\OneDrive\Documentos\U-TAD\TERCERO\ProgramacionGrafica\ProgGrafPractica2\ProgGrafica_2023_plantilla\ProgGrafica_2023\matrix4x4f.h(13,1): warning C4005: 'M_PI': redefinición de macro
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt\corecrt_math_defines.h(28): message : vea la definición anterior de 'M_PI'
-  Render.cpp
-C:\Users\alexe\OneDrive\Documentos\U-TAD\TERCERO\ProgramacionGrafica\ProgGrafPractica2\ProgGrafica_2023_plantilla\ProgGrafica_2023\matrix4x4f.h(13,1): warning C4005: 'M_PI': redefinición de macro
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt\corecrt_math_defines.h(28): message : vea la definición anterior de 'M_PI'
-C:\Users\alexe\OneDrive\Documentos\U-TAD\TERCERO\ProgramacionGrafica\ProgGrafPractica2\ProgGrafica_2023_plantilla\ProgGrafica_2023\Render.cpp(132,74): warning C4267: 'argumento': conversión de 'size_t' a 'GLsizei'; posible pérdida de datos
-  collider.cpp
-C:\Users\alexe\OneDrive\Documentos\U-TAD\TERCERO\ProgramacionGrafica\ProgGrafPractica2\ProgGrafica_2023_plantilla\ProgGrafica_2023\matrix4x4f.h(13,1): warning C4005: 'M_PI': redefinición de macro
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt\corecrt_math_defines.h(28): message : vea la definición anterior de 'M_PI'
-  object3D.cpp
-C:\Users\alexe\OneDrive\Documentos\U-TAD\TERCERO\ProgramacionGrafica\ProgGrafPractica2\ProgGrafica_2023_plantilla\ProgGrafica_2023\matrix4x4f.h(13,1): warning C4005: 'M_PI': redefinición de macro
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt\corecrt_math_defines.h(28): message : vea la definición anterior de 'M_PI'
-  Generando código...
   ProgGrafica_2023.vcxproj -> C:\Users\alexe\OneDrive\Documentos\U-TAD\TERCERO\ProgramacionGrafica\ProgGrafPractica2\ProgGrafica_2023_plantilla\x64\Debug\ProgGrafica_2023.exe

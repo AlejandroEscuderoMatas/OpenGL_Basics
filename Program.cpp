@@ -49,8 +49,8 @@ void Program::readVarList()
 
 	glGetProgramiv(idProgram, GL_ACTIVE_ATTRIBUTES, &numAttributes);
 	for (int i = 0; i < numAttributes; i++) {
-		char varName[20];
-		int bufSize = 20, length = 0, size = 0;
+		char varName[100];
+		int bufSize = 100, length = 0, size = 0;
 		GLenum type = -1;
 		glGetActiveAttrib(idProgram, (GLuint)i, bufSize, &length, &size, &type, varName);
 		varList[std::string(varName)] = glGetAttribLocation(idProgram, varName);
@@ -58,8 +58,8 @@ void Program::readVarList()
 
 	glGetProgramiv(idProgram, GL_ACTIVE_UNIFORMS, &numUniforms);
 	for (int i = 0; i < numUniforms; i++) {
-		char varName[20];
-		int bufSize = 20, length = 0, size = 0;
+		char varName[100];
+		int bufSize = 100, length = 0, size = 0;
 		GLenum type = -1;
 		glGetActiveUniform(idProgram, (GLuint)i, bufSize, &length, &size, &type, varName);
 		varList[std::string(varName)] = glGetUniformLocation(idProgram, varName);
@@ -121,15 +121,26 @@ void Program::setMatrixM(float* matrix)
 	setUniformMatrix4x4(getVarLocation("M"), matrix);
 }
 
-void Program::setLight(Light light)
+void Program::setLight1(Light light)
 {
-	glUniform4fv(getVarLocation("light.position"), 1, (float*)&(light.position.x));
-	glUniform4fv(getVarLocation("light.color"), 1, (float*)&(light.color.x));
-	glUniform4fv(getVarLocation("light.direction"), 1, (float*)&(light.direction.x));
-	glUniform1i(getVarLocation("light.type"), light.type);
-	glUniform1f(getVarLocation("light.ka"), light.ka);
-	glUniform1f(getVarLocation("light.kd"), light.kd);
-	glUniform1f(getVarLocation("light.ks"), light.ks);
+	glUniform4fv(getVarLocation("light1.position"), 1, (float*)&(light.position.x));
+	glUniform4fv(getVarLocation("light1.color"), 1, (float*)&(light.color.x));
+	glUniform4fv(getVarLocation("light1.direction"), 1, (float*)&(light.direction.x));
+	glUniform1i(getVarLocation("light1.type"), light.type);
+	glUniform1f(getVarLocation("light1.ka"), light.ka);
+	glUniform1f(getVarLocation("light1.kd"), light.kd);
+	//glUniform1f(getVarLocation("light.ks"), light.ks);
+}
+
+void Program::setLight2(Light light)
+{
+	glUniform4fv(getVarLocation("light2.position"), 1, (float*)&(light.position.x));
+	glUniform4fv(getVarLocation("light2.color"), 1, (float*)&(light.color.x));
+	glUniform4fv(getVarLocation("light2.direction"), 1, (float*)&(light.direction.x));
+	glUniform1i(getVarLocation("light2.type"), light.type);
+	glUniform1f(getVarLocation("light2.ka"), light.ka);
+	glUniform1f(getVarLocation("light2.kd"), light.kd);
+	//glUniform1f(getVarLocation("light.ks"), light.ks);
 }
 
 void Program::setMaterial(Material mat)

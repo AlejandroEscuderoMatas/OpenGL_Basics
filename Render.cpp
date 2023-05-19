@@ -1,4 +1,5 @@
 #include "Render.h"
+#include "OrbitalLight.h"
 
 void Render::initGL()
 {
@@ -63,16 +64,21 @@ void Render::putCamera(Camera* cam)
 	proyectionMatrixAux = cam->perspective();
 }
 
-void Render::putLight(Light* light)
+void Render::putLights(Light* light1, OrbitalLight* light2)
 {
-	this->light = light;
+	this->light1 = light1;
+	this->light2 = light2;
 }
 
-Light* Render::getLight()
+Light* Render::getLight1()
 {
-	return this->light;
+	return this->light1;
 }
 
+OrbitalLight* Render::getLight2()
+{
+	return this->light2;
+}
 
 void Render::drawGL()
 {
@@ -84,7 +90,7 @@ void Render::drawGL()
 		i->updateModelMatrix();
 
 		Matrix4x4f MVP =matrix4x4f::transverse(matrix4x4f::matrixProduct(proyectionMatrixAux, matrix4x4f::matrixProduct(viewMatrixAux, i->modelMatrix)));
-
+		Matrix4x4f M = matrix4x4f::transverse(i->modelMatrix);
 
 		// LOS BUFFER OBJECTS COPIAN LOS DATOS DE LOS OBJECTOS DE CPU A GPU-----------------------------------
 		
@@ -100,14 +106,15 @@ void Render::drawGL()
 
 		//Le decimos al programa lo que tiene que guardar
 		i->prg->setVertexPositions((void*)offsetof(Vertex, posicion));
-		i->prg->setVertexColors((void*)offsetof(Vertex, color));
+		//i->prg->setVertexColors((void*)offsetof(Vertex, color));
 		i->prg->setVertexNormals((void*)offsetof(Vertex, normal));
 		i->prg->setVertexUVs((void*)offsetof(Vertex, uv));
 		
 		i->prg->setMatrixMVP((float*)&MVP);
-		i->prg->setMatrixM((float*)&i->modelMatrix);
+		i->prg->setMatrixM((float*)&M);
 
-		i->prg->setLight(*this->light);
+		i->prg->setLight1(*this->light1);
+		i->prg->setLight2(*this->light2);
 
 		i->mat->bind(0);
 		i->prg->setMaterial(*i->mat);
@@ -151,7 +158,8 @@ void Render::mainLoop()
 		glfwPollEvents();
 
 		camera->Move(1.0);
-		light->move(1.0);
+		light1->move(1.0);
+		light2->move(1.0);
 
 		//CON ESTO LLAMAMOS AL MOVE DE CADA OBJETO Y ACTUALIZAMOS SU MATRIZ
 		for (auto& i : objectList)

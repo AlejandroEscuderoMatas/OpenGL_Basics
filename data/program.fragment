@@ -15,7 +15,8 @@ struct material_t{
 	sampler2D textureUnitID;
 };
 
-uniform light_t light;
+uniform light_t light1;
+uniform light_t light2;
 uniform material_t materials;
 
 in vec4 fcolor;
@@ -36,29 +37,40 @@ void main()
 	float specular=0.0f;
 
 	//En L guardamos el vector de incidencia con la luz de ese fragmento
-	vec3 L=vec3(0.0f,0.0f,0.0f);
+	vec3 L1=vec3(0.0f,0.0f,0.0f);
+	vec3 L2=vec3(0.0f,0.0f,0.0f);
 	//En N vamos a guardar la normal de cada pixel/fragmento
 	vec3 N=normalize(fnormal.xyz);
 
 	//Las direccionales van a tener rayos paralelos
-	if(light.type==0)//directional
+	if(light1.type==0)//directional
 	{
-		L=normalize(light.direction.xyz);
+		L1=normalize(light1.direction.xyz);
 	}
 	//Las puntuales son puntos de luz
-	if(light.type==1)//puntual
+	if(light1.type==1)//puntual
 	{
-		L=normalize(light.position.xyz-fpos.xyz);
+		L1=normalize(light1.position.xyz-fpos.xyz);
 	}
 
-	//Siempre será la misma
-	ambient=light.ka;
+	if(light2.type==0)//directional
+	{
+		L2=normalize(light2.direction.xyz);
+	}
+	//Las puntuales son puntos de luz
+	if(light2.type==1)//puntual
+	{
+		L2=normalize(light2.position.xyz-fpos.xyz);
+	}
+
+	//Siempre será la misma, multiplicamos para reducir mensajes de error
+	ambient=(light1.ka*light2.ka);
 	//Dependerá de como interactúe la luz con el objeto
-	diffuse=light.kd*max(dot(L,N),0.0f);
+	diffuse=light1.kd*max(dot(L1,N),0.0f) + light2.kd*max(dot(L1,N),0.0f);
 	//Depende del material, rugosidad, pulido
 	//specular=light.ks;
 
-	finalLight=(ambient+diffuse+specular)*light.color;
+	finalLight=(ambient+diffuse+specular)*(light1.color+light2.color);
 
 	gl_FragColor=finalColor*finalLight;
 

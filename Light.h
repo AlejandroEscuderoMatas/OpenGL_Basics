@@ -21,5 +21,5 @@ public:
 
 	Light(Vector4f position, Vector4f color, Vector4f direction, lightTypes  type, float ka, float kd, float ks);
 
-	void move(double timeStep);
+	virtual void move(double timeStep);
 };
