@@ -4,7 +4,7 @@
 Light::Light(Vector4f position,
 	Vector4f color,
 	Vector4f direction,
-	lightTypes  type,
+	int  type,
 	float ka,
 	float kd,
 	float ks)

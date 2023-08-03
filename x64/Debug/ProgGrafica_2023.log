@@ -1,4 +1,9 @@
-﻿  Main.cpp
+﻿  Camera.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt\corecrt_math_defines.h(28,1): warning C4005: 'M_PI': redefinición de macro
 C:\Users\alexe\OneDrive\Documentos\U-TAD\TERCERO\ProgramacionGrafica\ProgGrafPractica2\ProgGrafica_2023_plantilla\ProgGrafica_2023\matrix4x4f.h(13): message : vea la definición anterior de 'M_PI'
+C:\Users\alexe\OneDrive\Documentos\U-TAD\TERCERO\ProgramacionGrafica\ProgGrafPractica2\ProgGrafica_2023_plantilla\ProgGrafica_2023\OrbitalLight.h(15,1): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+C:\Users\alexe\OneDrive\Documentos\U-TAD\TERCERO\ProgramacionGrafica\ProgGrafPractica2\ProgGrafica_2023_plantilla\ProgGrafica_2023\Camera.cpp(113,27): warning C4244: '-=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\alexe\OneDrive\Documentos\U-TAD\TERCERO\ProgramacionGrafica\ProgGrafPractica2\ProgGrafica_2023_plantilla\ProgGrafica_2023\Camera.cpp(114,27): warning C4244: '+=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\alexe\OneDrive\Documentos\U-TAD\TERCERO\ProgramacionGrafica\ProgGrafPractica2\ProgGrafica_2023_plantilla\ProgGrafica_2023\Collider.h(100): warning C4715: 'Sphere::test': no todas las rutas de acceso de control devuelven un valor
+LINK : warning LNK4098: la biblioteca predeterminada'MSVCRT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
   ProgGrafica_2023.vcxproj -> C:\Users\alexe\OneDrive\Documentos\U-TAD\TERCERO\ProgramacionGrafica\ProgGrafPractica2\ProgGrafica_2023_plantilla\x64\Debug\ProgGrafica_2023.exe

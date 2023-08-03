@@ -64,9 +64,9 @@ void main()
 	}
 
 	//Siempre será la misma, multiplicamos para reducir mensajes de error
-	ambient=(light1.ka*light2.ka);
+	ambient=(light2.ka);
 	//Dependerá de como interactúe la luz con el objeto
-	diffuse=light1.kd*max(dot(L1,N),0.0f) + light2.kd*max(dot(L1,N),0.0f);
+	diffuse=light1.kd*max(dot(L1,N),0.0f)+light2.kd*max(dot(L2,N),0.0f);
 	//Depende del material, rugosidad, pulido
 	//specular=light.ks;
 

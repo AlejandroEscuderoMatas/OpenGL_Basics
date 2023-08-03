@@ -23,6 +23,8 @@ public:
 	Program* prg;
 	Material* mat;
 
+	Sphere* coll;
+
 	std::vector<Vertex> vertexList;
 	std::vector<int>    idList;
 
@@ -31,4 +33,5 @@ public:
 	void createObject();
 	void move(double timeStep);
 	void updateModelMatrix();
+	void updateCollider();
 };

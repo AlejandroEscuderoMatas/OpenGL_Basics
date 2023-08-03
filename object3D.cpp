@@ -68,8 +68,68 @@ void Object3D::loadFromFile(const char* fileName)
 		//prg->clean();
 
 		mat = new Material(texture, 0, 0, 0);
+
+		this->coll = new Sphere();
+
+		if (false)//mat.enabled) {
+		{
+			//añado píxeles "visibles"
+			//buscar vértices máximos y mínimos
+			Vector4f maximo = vector4f::make_vector4f(-9999.0f, -9999.0f, -9999.0f, 1.0f);
+			Vector4f minimo = vector4f::make_vector4f(9999.0f, 9999.0f, 9999.0f, 1.0f);
+
+			for (auto v : vertexList)
+			{
+				Vector4f particula = v.posicion;
+				if (minimo.x > particula.x) minimo.x = particula.x;
+				if (minimo.y > particula.y) minimo.y = particula.y;
+				if (minimo.z > particula.z) minimo.z = particula.z;
+
+				if (maximo.x < particula.x) maximo.x = particula.x;
+				if (maximo.y < particula.y) maximo.y = particula.y;
+				if (maximo.z < particula.z) maximo.z = particula.z;
+			}
+			float stepx = (maximo.x - minimo.x) / (float)mat->width;
+			float stepy = (maximo.y - minimo.y) / (float)mat->height;
+
+			for (int i = 0; i < mat->height; i++)
+				for (int j = 0; j < mat->width; j++)
+				{
+					particle_t part = { 
+						vector4f::make_vector4f(
+							minimo.x + ((float)j + 1) * stepx,
+							minimo.y + ((float)i + 1) * stepy,
+							minimo.z, 1.0f
+						),
+						vector4f::make_vector4f(
+							minimo.x + ((float)j) * stepx,
+							minimo.y + ((float)i) * stepy,
+							minimo.z, 1.0f
+						) };
+					if (mat->datargba[i * mat->width + j].a > 0)
+						coll->addParticle(part);
+				}
+			coll->subdivide();
+		}
+		else
+		{//añado vértices
+			for (auto v : vertexList)
+			{
+				particle_t part{
+					vector4f::make_vector4f(v.posicion.x + 0.1f,v.posicion.y + 0.1f,v.posicion.z + 0.1f,1.0f),
+
+					vector4f::make_vector4f(v.posicion.x - 0.1f,v.posicion.y - 0.1f,v.posicion.z - 0.1f,1.0f)
+
+				};
+				coll->addParticle(part);
+			}
+			//coll->subdivide();
+
+		}
+		
 	}
 }
+	
 
 void Object3D::createObject()
 {
@@ -143,6 +203,11 @@ void Object3D::updateModelMatrix()
 	Matrix4x4f scaleMatrix = matrix4x4f::make_scale(scale.x, scale.y, scale.z);
 
 	modelMatrix = matrix4x4f::matrixProduct(matrix4x4f::matrixProduct(translateMatrix, rotateMatrix), scaleMatrix);
+}
+
+void Object3D::updateCollider()
+{
+	coll->update(modelMatrix);
 }
 
 

@@ -1,6 +1,7 @@
 #include "Camera.h"
 
 #include "InputManager.h"
+#include "Render.h"
 
 Camera::Camera(Vector4f lookAt, Vector4f pos, Vector4f rot, Vector4f Up, float fovy, float zNear, float zFar, float aspectRatio)
 {
@@ -15,6 +16,15 @@ Camera::Camera(Vector4f lookAt, Vector4f pos, Vector4f rot, Vector4f Up, float f
 	this->zFar        = zFar;
 	this->radious     = vector4f::substraction(lookAt, pos);
 	this->rotXY       = vector4f::make_vector4f(0.0f, 0.0f, 0.0f, 1.0f);
+
+	this->collider = new Sphere();
+
+	particle_t part{
+		vector4f::make_vector4f(pos.x + 0.1f,pos.y + 0.1f,pos.z + 0.1f,1.0f),
+
+		vector4f::make_vector4f(pos.x - 0.1f,pos.y - 0.1f,pos.z - 0.1f,1.0f)
+	};
+	this->collider->addParticle(part);
 
 	perspective();
 }
@@ -65,6 +75,7 @@ Matrix4x4f Camera::perspective()
 void Camera::Move(double timeStep)
 {
 	static float prevMX = 0, prevMY = 0;
+	Vector4f prevPos = pos;
 
 	if (InputManager::keysState[GLFW_KEY_LEFT_SHIFT])
 	{
@@ -106,8 +117,16 @@ void Camera::Move(double timeStep)
 		//ROTAMOS Y LUEGO TRASLADAMOS
 		this->lookAt = matrix4x4f::vectorProduct(mRot, this->radious);
 		this->lookAt = vector4f::addition(this->lookAt, this->pos);
+	
+		this->collider->center = pos;
 	}
 
 	prevMX = InputManager::posMX;
 	prevMY = InputManager::posMY;
+
+	if (Render::objectList[0]->coll->test(collider))
+	{
+		std::cout << "La camara ha chocado\n";
+		this->pos = prevPos;
+	}
 }

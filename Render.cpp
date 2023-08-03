@@ -64,20 +64,14 @@ void Render::putCamera(Camera* cam)
 	proyectionMatrixAux = cam->perspective();
 }
 
-void Render::putLights(Light* light1, OrbitalLight* light2)
+void Render::putLight(Light* lights)
 {
-	this->light1 = light1;
-	this->light2 = light2;
+	this->lights.push_back(lights);
 }
 
-Light* Render::getLight1()
+Light* Render::getLight(unsigned int i)
 {
-	return this->light1;
-}
-
-OrbitalLight* Render::getLight2()
-{
-	return this->light2;
+	return this->lights[i];
 }
 
 void Render::drawGL()
@@ -113,8 +107,8 @@ void Render::drawGL()
 		i->prg->setMatrixMVP((float*)&MVP);
 		i->prg->setMatrixM((float*)&M);
 
-		i->prg->setLight1(*this->light1);
-		i->prg->setLight2(*this->light2);
+		i->prg->setLight1(*this->getLight(0));
+		i->prg->setLight2(*this->getLight(1));
 
 		i->mat->bind(0);
 		i->prg->setMaterial(*i->mat);
@@ -158,8 +152,9 @@ void Render::mainLoop()
 		glfwPollEvents();
 
 		camera->Move(1.0);
-		light1->move(1.0);
-		light2->move(1.0);
+
+		for(auto& i : lights)
+			i->move(1.0);
 
 		//CON ESTO LLAMAMOS AL MOVE DE CADA OBJETO Y ACTUALIZAMOS SU MATRIZ
 		for (auto& i : objectList)

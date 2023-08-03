@@ -2,6 +2,7 @@
 
 #include "matrix4x4f.h"
 #include "vertex.h"
+#include "Collider.h"
 
 class Camera
 {
@@ -22,6 +23,8 @@ public:
 	//radius
 	Vector4f radious;
 	Vector4f rotXY;
+
+	Sphere* collider = nullptr;
 
 	Camera(Vector4f lookAt, Vector4f pos, Vector4f rot, Vector4f Up, float fovy, float zNear, float zFar, float aspectRatio);
 	Matrix4x4f view();

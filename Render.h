@@ -6,6 +6,7 @@
 #include "object3D.h"
 #include "Camera.h"
 #include "InputManager.h"
+#include "OrbitalLight.h"
 
 typedef struct
 {
@@ -20,9 +21,8 @@ public:
 	GLFWwindow* window;
 	Camera* camera;
 	Matrix4x4f proyectionMatrixAux;
-	std::vector<Object3D*> objectList;
-	Light* light1;
-	OrbitalLight* light2;
+	static inline std::vector<Object3D*> objectList;
+	std::vector<Light*> lights;
 
 	std::map<unsigned int, BufferObject> bufferList;
 	
@@ -30,8 +30,7 @@ public:
 	void setupObject(Object3D* obj);
 	void putCamera(Camera* cam);
 	void drawGL();
-	void putLights(Light* light1, OrbitalLight* light2);
-	Light* getLight1();
-	OrbitalLight* getLight2();
+	void putLight(Light* light1);
+	Light* getLight(unsigned int i);
 	void mainLoop();
 };

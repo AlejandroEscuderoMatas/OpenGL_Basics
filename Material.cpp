@@ -14,7 +14,7 @@ Material::Material(std::string textureName, float ka, float kd, float ks)
 	int comp = 0;
 	stbi_set_flip_vertically_on_load(true);
 	//AQUI ESTAN TODOS LOS COLORES DESCOMPRIMIDOS
-	unsigned char* data = (unsigned char*)stbi_load(this->textureName.c_str(), &this->width, &this->height, &comp, 4);
+	this->data = (unsigned char*)stbi_load(this->textureName.c_str(), &this->width, &this->height, &comp, 4);
 	if (data != nullptr)
 	{
 		//PEDIMOS RESERVAR MEMORIA A LA GPU CON EL IDENTIFICADOR, FUNCIONA COMO UNA REFERENCIA A LA MEMORIA PRINCIPAL
